@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Cleanup task
+
+rm -fr /usr/local/bundle/cache
+rm -fr /usr/local/lib/ruby/gems/*/cache
+
+rm -fr /usr/local/bundle/gems/*/tests
+rm -fr /usr/local/bundle/gems/*/test
+rm -fr /usr/local/bundle/gems/*/spec
+rm -fr /usr/local/bundle/gems/*/features
+rm -fr /usr/local/bundle/gems/*/docs
+rm -fr /usr/local/bundle/gems/*/doc
+rm -fr /usr/local/bundle/gems/*/doc-api
+rm -fr /usr/local/bundle/gems/*/examples
+rm -fr /usr/local/bundle/gems/*/benchmarks
+rm -fr /usr/local/bundle/gems/*/benchmark
+
+rm -fr /usr/local/bundle/gems/*/ext/*/tmp
+
+find /usr/local/bundle/gems -name '*.o' | xargs rm -f
+find /usr/local/bundle/gems -name '*.so' | xargs rm -f
+find /usr/local/bundle/gems -name '*.bundle' | xargs rm -f
