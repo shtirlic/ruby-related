@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Entrypoint for Docker container
+
+set -xe
+
+function setup {
+  rake db:create
+  rake db:migrate
+  rake db:seed
+}
+
+function cron {
+  exec rails runner config/schedule.rb &>/dev/null
+}
+
+function migrate {
+  rake db:migrate
+}
+
+function seed {
+  rake db:seed
+}
+
+function console {
+  exec rails console
+}
+
+function start_api {
+  rm -f /usr/src/app/tmp/pids/server.pid
+  exec rails s puma -b 0.0.0.0 -p $PORT
+}
+
+function start_sidekiq {
+  exec sidekiq -q highest -q high -q default
+}
+
+case $1 in
+  console)
+    console
+    ;;
+  cron)
+    cron
+    ;;
+  migrate)
+    migrate
+    ;;
+  seed)
+    seed
+    ;;
+  setup)
+    setup
+    ;;
+  api)
+    start_api
+    ;;
+  sidekiq)
+    start_sidekiq
+    ;;
+  *)
+    cat <<EOF
+No valid command specified. Valid commands include:
+
+  * setup: Run the one-time setup (create and migrate)
+  * cron: Run cron
+  * migrate: Run migrations
+  * seed: Seed initial values
+  * api: Run API server
+  * sidekiq: Run the sidekiq worker
+EOF
+    ;;
+esac
