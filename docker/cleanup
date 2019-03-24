@@ -21,3 +21,9 @@ rm -fr /usr/local/bundle/gems/*/ext/*/tmp
 find /usr/local/bundle/gems -name '*.o' | xargs rm -f
 find /usr/local/bundle/gems -name '*.so' | xargs rm -f
 find /usr/local/bundle/gems -name '*.bundle' | xargs rm -f
+
+rm -fr /usr/include
+rm -fr /root/.bundle/cache/compact_index
+
+rm -rf /var/cache/apk/*
+rm -rf /tmp/*

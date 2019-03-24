@@ -1,4 +1,5 @@
 # ruby-related
 Some Ruby related things
 
-* Dockerfile - Super Uber Premium small image with mysql and pg libs based on alpine3.6 and ruby:2.4
+* Dockerfile - Super Uber Premium small image with mysql and pg libs based on alpine3.9 and ruby:2.6.2
+* docker/cleanup  - Super cleanup for all unused stuff in image
